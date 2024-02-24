@@ -1,0 +1,115 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+:root {
+  --box-color: #d90429;
+  --box-size: 100px;
+  --mark-size: calc(var(--box-size) * 0.9);
+}
+
+body {
+  margin: 0;
+}
+
+.block {
+  background: black;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: repeat(3, auto);
+  cursor: pointer;
+}
+
+.box {
+  width: var(--box-size);
+  height: var(--box-size);
+  border: 1px solid var(--box-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.box:first-child,
+.box:nth-child(2),
+.box:nth-child(3) {
+  border-top: none;
+}
+
+.box:nth-child(3n + 1) {
+  border-left: none;
+}
+
+.box:nth-child(3n + 3) {
+  border-right: none;
+}
+
+.box:last-child,
+.box:nth-child(8),
+.box:nth-child(7) {
+  border-bottom: none;
+}
+
+.box.x,
+.box.circle {
+  cursor: not-allowed;
+}
+
+.box.x::before,
+.box.x::after,
+.box.circle::before {
+  background-color: var(--box-color);
+}
+
+.block.x .box:not(.x):not(.circle):hover::before,
+.block.x .box:not(.x):not(.circle):hover::after,
+.block.circle .box:not(.x):not(.circle):hover::before {
+  background-color: #6a040f;
+}
+.box.x::before,
+.box.x::after,
+.block.x .box:not(.x):not(.circle):hover::before,
+.block.x .box:not(.x):not(.circle):hover::after {
+  content: "";
+  position: absolute;
+  width: calc(var(--mark-size) * 0.15);
+  height: var(--mark-size);
+}
+
+.box.x::before,
+.block.x .box:not(.x):not(.circle):hover::before {
+  transform: rotate(45deg);
+}
+
+.box.x::after,
+.block.x .box:not(.x):not(.circle):hover::after {
+  transform: rotate(-45deg);
+}
+
+.box.circle::before,
+.box.circle::after,
+.block.circle .box:not(.x):not(.circle):hover::before,
+.block.circle .box:not(.x):not(.circle):hover::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+
+.box.circle::before,
+.block.circle .box:not(.x):not(.circle):hover::before {
+  width: var(--mark-size);
+  height: var(--mark-size);
+}
+.box.circle::after,
+.block.circle .box:not(.x):not(.circle):hover::after {
+  width: calc(var(--mark-size) * 0.7);
+  height: calc(var(--mark-size) * 0.7);
+  background-color: black;
+}
